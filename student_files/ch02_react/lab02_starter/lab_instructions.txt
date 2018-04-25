@@ -1,0 +1,112 @@
+Lab Exercise 2
+--------------
+
+Introduction:
+    In this exercise, you will display a list of contacts by composing JSX
+    components.  The goal of this exercise is to ensure you can create a JSX
+    component and pass values into it using the props property.
+
+
+1. Begin by running the command npm install (from within WebStorm, right-click
+   on the package.json file and choose Run 'npm install'.  This will build the
+   missing node_modules dependencies.
+
+
+2. Open src/components/contact.jsx.  Notice the Contact class discussed in the
+   materials is already present.  You will need to create a Component, called
+   ContactList, that will render a list of <Contact /> types.
+   Begin by creating the class (below the Contact class).
+
+
+class ContactList extends React.Component {
+
+}
+
+
+
+
+   Add a render(){} method to the class.
+
+
+render() {
+
+}
+
+
+
+   Within the render method you will need to iterate over each
+   contact.  Shortly we will pass the contacts into the ContactList component and it will be available on the props
+   (this.props) property.  For now, don't worry about the key attribute, this is discussed in a later chapter.
+
+
+let list = this.props.contacts.map(function(c) {
+    return <Contact {...c} key={c.contactid}/>;
+});
+
+
+   Finally, return from render(), your ContactList component structure:
+
+return (
+    <ul className="contacts">
+        { list }
+    </ul>
+);
+
+
+   Don't forget to export the ContactList component as well.
+
+
+export { ContactList };
+
+
+3. Now it's time to create the App class.  This class will be written within
+   app.jsx, so open this file next.  The App class will be a combination of the
+   MainHeader component and the ContactList.  As in step 2, create the App class
+   (below the MainHeader class) and add a render() method to it.
+
+
+
+class App extends React.Component{
+    render(){
+
+    }
+}
+
+
+
+   Add a return value that returns a <div> that wraps both the MainHeader and ContactList
+   components.  The ContactList component gets the contact array passed to it from the App's
+   this.props property.:
+
+
+
+return (
+    <div>
+         <MainHeader title={this.props.title} />
+         <ContactList contacts={this.props.contacts}/>
+    </div>
+);
+
+
+
+Don't forget to export App also.
+
+
+
+4. Open index.js.  We need to import the App class.  Do that in this file.
+
+
+import { App } from './components/app.jsx';
+
+
+   Within the ReactDOM.render() method, render the App component passing both the title AND contacts.
+
+<App title={title} contacts={contacts}/>
+
+
+
+5. Run create-bundle.
+
+
+6. Run start.
+

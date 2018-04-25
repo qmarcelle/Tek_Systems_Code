@@ -1,0 +1,18 @@
+html { font: 12px sans-serif; }
+
+.search-form {
+    font-size: 2rem;
+}
+.search-form input {
+    font-size: 2rem;
+}
+
+.search-form input[type=text] {
+    color: darkcyan;
+}
+
+#resultsDiv {
+    margin: 20px 0 0 10px;
+    color: crimson;
+    font-size: 2rem;
+}

@@ -1,0 +1,17 @@
+html { font: 20px sans-serif; color: #ff21c2; }
+ul { list-style-type: none; }
+
+.create-contact-form {
+    margin: auto;
+    width: 40%;
+}
+
+.create-contact-form form { font-size: 2rem; }
+.create-contact-form input, .create-contact-form label { font: inherit; }
+.create-contact-form li { padding: 10px; }
+.create-contact-form li:after { clear: both; display: block; content: ''; }
+.create-contact-form input { width: 60%; float: right; color: #207dcc; }
+.create-contact-form label { width: 35%; float: left; }
+.create-contact-form input[type=submit] { text-align: center; float: none; display: block; margin: auto; }
+
+.error-msgs { color: red; font: italic 1rem sans-serif; padding: 0; }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Creating React Components</title>
+        <style>
+            html { font-size: 20px; }
+            h3, h4 { margin: 0; }
+            ul { padding: 0; list-style-type: none; }
+            #root div { width: 40%; padding: 0 0 5px 10px; background-image: linear-gradient(to top, #CAFFB8, #6dc582) }
+
+            .contact { display: flex; }
+            .contact h2 { font-size: 1.25rem; color: #0b3e6f; }
+            .contact h3 { width: 30%; font-size: 1rem; color: #806227;}
+            .contact h4 { width: 70%; font-size: 0.9rem; }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="contactdata.js"></script>
+        <script src="libs/react.js"></script>
+        <script src="libs/react-dom.js"></script>
+        <script>
+
+            var Contact = React.createClass({
+                propTypes: {
+                    name: React.PropTypes.string.isRequired,
+                    address: React.PropTypes.string
+                },
+
+                render: function() {
+                    return (
+                        React.createElement('li', {key: this.props.contactid, className: 'contact'},
+                            React.createElement('h3', null, this.props.name),
+                            React.createElement('h4', null, this.props.address)
+                        )
+                    )
+                },
+            }),
+
+            contactElems = contacts.map(function(oneContact){
+                return React.createElement(Contact, oneContact);
+            });
+
+            rootEl =
+                React.createElement('div', null,
+                    React.createElement('h2', null, 'Contacts'),
+                    React.createElement('ul', null, contactElems)
+                );
+
+            ReactDOM.render(rootEl, document.getElementById('root'));
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,114 @@
+Lab Exercise 4
+--------------
+
+Introduction:
+    In this exercise, you will incorporate event handling and manage states and props
+    for multiple components.  You will create a new component, ContactDetails, that displays
+    the detailed information of a contact.  You will also need to manage state information by
+    passing it up to the parent so that it can be used elsewhere.
+
+
+1. Create the ContactDetails class.  The role of the ContactDetails class is to display
+   the name, address, email, company, position, and phones of a contact.  You can simply
+   do this in the render() function by rendering a <ul> with <li> elements.  Can you create
+   the ContactDetails class on your own?  Note: to get the styling to appear, wrap the <ul> in
+   a div with the className of "details":  <div className="details">.
+
+
+   To verify your class, compare it to the one shown in the back of the student manual.
+
+
+
+
+2. Add event handling to the Contact class.
+   There are essentially 3 parts needed to add an event to a class:
+   a)	A bind() statement in the constructor
+   b)	A method in the class
+   c)	An event handler attribute on one of the HTML elements in the render() function.
+
+Let's add of these three items to our Contact class.
+Can you figure out where in the Contact class to place
+the 3 statements shown below:
+
+
+this.handleSelectContact = this.handleSelectContact.bind(this);
+
+
+handleSelectContact(evt){
+    this.props.onSelectContact(this.props.contactid);
+}
+
+
+onClick={this.handleSelectContact}
+
+
+
+
+3. Add event handling to the ContactList class.
+   We'll repeat the last step for the ContactList almost identically, except instead
+   of placing an onClick event handler on the <li>, we'll add an onSelectContact
+   attribute to the <Contact> element that we create iteratively.  Can you do this by
+   again adding the following 3 statements to the ContactList class?  Notice we are
+   also adding in a constructor to the ContactList class:
+
+
+constructor(props){
+    super(props);
+    this.handleSelectContact = this.handleSelectContact.bind(this);
+}
+
+
+handleSelectContact(contactid){
+    let contact = this.props.contacts.find((c)=> contactid == c.contactid);
+    this.props.onSelectContact(contact);
+}
+
+
+<Contact {...c} key={c.contactid} onSelectContact={this.handleSelectContact}/>
+
+
+
+Note: that the handleSelectContact() method is performing a search of the contacts
+array to find the desired contact.
+
+
+
+
+4. Add event handlers to ContactSearch.
+   We'll add the last pair of event handling interactions.  This time we'll add a
+   handleSubmit() and handleInputChange() pair of event handlers to our ContactSearch
+   class.
+
+   First, try to add a handleInputChange() event handler to your class.  Use an arrow
+   function the handle the onChange event in your <input> element.  Check your
+   attempt by comparing it to step 4 in the student manual.
+
+
+   Now repeat by adding the handleSubmit() event handler.  This should have a bind()
+   method call in the constructor.  Also add an onSubmit in the <form> that calls
+   handleSubmit().  Again compare your answer to the one shown in part two of step 4
+   in the student manual.
+
+
+5. Complete <App> within app.jsx.
+   The final step is to add the ContactDetails component to the App component's render() function in app.jsx.
+   Add this now.
+
+   <ContactDetails contact={this.state.contact} />
+
+   Don't forget to import it into app.jsx
+
+
+   We're almost there!
+   Notice the ContactSearch class invokes this.props.onSearchForContact(contact) from within its handleSubmit().
+   This actually then calls the handleChangeContact() of the App class.  See how the <ContactSearch> within
+   the render() of the App class has an onSearchForContact attribute?  This invokes handleChangeContact().
+   But the handleChangeContact doesn't exist yet.  Let's add that now.  Add the following to the App class:
+
+   handleChangeContact(contact) {
+       this.setState({contact});
+   }
+
+   Also, we'll add a bind() call for it in the constructor:
+
+   this.handleChangeContact = this.handleChangeContact.bind(this);

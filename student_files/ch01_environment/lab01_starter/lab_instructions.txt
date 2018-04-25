@@ -1,0 +1,155 @@
+Lab Exercise 1
+--------------
+
+Introduction:
+    In this exercise, you will build the mini-Contact application.  The
+    goal of this exercise is to ensure you can establish and execute a build
+    environment that incorporates: Node, NPM, Webpack, Babel, and eventually
+    other tools as well.
+
+
+1. Run npm init from a terminal or command window.  Choose the defaults or
+   add appropriate values for author, description, etc.
+
+
+2. Modify the scripts section as follows
+   (you may remove the test entry if you desire).
+   Watch your placement of commas!
+
+  "scripts": {
+    "start": "webpack-dev-server --hot",
+    "create-bundle": "webpack"
+  }
+
+
+  Also, add the following two sections related to dependencies:
+
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "webpack": "^2.7.0",
+    "webpack-dev-server": "^2.9.7",
+    "lodash": "^4.17.4",
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+  }
+
+
+3. Run the command: npm install.  This may take a minute or two to complete.
+   (Note: if using WebStorm, you may right-click on package.json
+   and select Run 'npm install')
+
+
+4. Create a .babelrc file with the following contents:
+
+    {
+        "presets":[ "env", "react" ],
+        "plugins": ["transform-es2015-destructuring", "transform-object-rest-spread"]
+    }
+
+
+
+   Also, create a webpack.config.js file with the following contents:
+
+
+
+let config = {
+    entry: './src/index.js',
+
+    output: {
+        filename: './build/bundle.js',
+    },
+
+    devServer: {
+        contentBase: './',
+        inline: true,
+        port: 8006
+    },
+
+
+    module: {
+        loaders: [
+            { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+            { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
+        ]
+    },
+};
+
+module.exports = config;
+
+
+5. Create a subdirectory within the project called 'src'.
+   Within this directory, create two files: contacts.js and index.js.
+
+
+6. Create index.html in the project directory as follows:
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Lab01 Exercise</title>
+    </head>
+    <body>
+        <div id="root"><h1></h1></div>
+        <script src="build/bundle.js"></script>
+    </body>
+</html>
+
+
+7. Within contacts.js add an array of contacts and a title
+   (we'll discuss the let keyword later and we'll acquire data from the server later):
+
+let contacts = [
+    { "contactid" : 500, "name" : "Red Victors",  "address" : "4517 Elm St. Riverside NJ 08075"},
+    { "contactid" : 501, "name" : "Bob Green",  "address" : "2101 Eucalyptus Ave. Philadelphia PA 09119"},
+    { "contactid" : 502, "name" : "John Brown",  "address" : "331 Birch Cir. Black Hills SD 82101"},
+    { "contactid" : 503, "name" : "Tina O. Range",  "address" : "82 Pine Dr. Lakewood CA 90713"},
+    { "contactid" : 504, "name" : "Berry Blumenthal",  "address" : "3012 Mahogany Ln. Denver CO 80101"},
+    { "contactid" : 505, "name" : "Jim Pinkado",  "address" : "2113 Redwood Blvd. Long Beach CA 90314"},
+    { "contactid" : 506, "name" : "Alicia Grey",  "address" : "415 Poplar Ct. St. Louis MO 72210"},
+    { "contactid" : 507, "name" : "Violet Waters",  "address" : "821 Ash Way Seattle WA 92230"},
+    { "contactid" : 508, "name" : "Sandy White",  "address" : "906 Hickory Rd. Phoenix, AZ 83010"},
+    { "contactid" : 509, "name" : "Kay Black",  "address" : "1241 Maple Pl. Plano TX 72110"}
+];
+
+let title = 'Contacts Application';
+
+export { contacts, title };
+
+
+8. Complete index.js as follows:
+
+import {contacts, title} from './contacts';
+
+document.querySelector('title').innerHTML = title;
+document.querySelector('#root h1').innerHTML = title;
+
+let root = document.querySelector('#root');
+let ulNode = document.createElement('ul');
+
+contacts.forEach(function (contact) {
+    let newNode = document.createElement('li');
+    newNode.innerHTML = `<span>${contact.name}</span> <span>${contact.address}</span>`;
+    ulNode.appendChild(newNode);
+});
+
+root.appendChild(ulNode);
+
+
+9. Run the command: npm run create-bundle
+   (Note: if using WebStorm, you may right-click on package.json and select Show npm scripts
+   and then double-click the 'create-bundle' entry in the npm view.)
+
+
+10. Run the command: npm start
+    (Note: if using WebStorm, you may double-click the 'start' entry in the npm view.)

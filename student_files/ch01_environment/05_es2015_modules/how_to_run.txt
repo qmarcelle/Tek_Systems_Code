@@ -1,0 +1,13 @@
+To run this example:
+
+1. You must first install global packages...(if you haven't already)
+
+      npm install -g babel-cli
+
+2. Run the command: npm install  (from the current directory).
+   Note: from within WebStorm, right-click the package.json and choose Run npm install
+
+3. Run the command: npm run webpack  (creates bundle.js)
+   Note: from within WebStorm, right-click package.json and choose Show npm Scripts, then double-click the "webpack" entry in the npm view.
+
+4. Open index.html in a browser directly, open the dev tools console.  View the console output.

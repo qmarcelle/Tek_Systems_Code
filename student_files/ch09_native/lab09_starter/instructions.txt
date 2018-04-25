@@ -1,0 +1,61 @@
+Lab Exercise 9 - Building the React Native Movie Application
+------------------------------------------------------------
+
+Introduction:
+    In this exercise, you will attempt to build the Movie application using
+    React Native.  This exercise is optional as it requires a second device
+    such as a mobile device or tablet.
+
+
+
+1. Install yarn and the create-react-native-app
+   -------------------------------------------------------
+   If you are running npm > 5.x (check with npm -v), then you should first install yarn.
+   To install yarn, visit the yarn homepage (https://yarnpkg.com/lang/en/docs/install/),
+   select your operating system, and follow the instructions.
+
+
+   With yarn installed, next install create-react-native-app by issuing the following
+   command from a terminal or command window:
+
+
+   yarn global add create-react-native-app
+
+
+
+2. Install Expo
+   ------------
+   Using your mobile/tablet device, visit either the Google or Apple stores.  Look for
+   an app called Expo.  It's logo is a blue circle with a white ^ (caret) symbol (see
+   the student manual for a screenshot of the logo).
+
+
+
+3. Start the Server, Sync with Expo
+   --------------------------------
+   Change (cd) to the ch09_native/project1 directory.  Before starting your server, you may wish
+   to rename App2.js to App.js (it's okay to overwrite App.js, the original is App1.js).
+
+   Start the server by issuing the command: yarn start.
+
+   After the server starts, a QR code will appear on terminal output.  With Expo started, scan
+   the QR code (Expo will automatically see it).  Now your device can "see" changes made by you
+   on the development server.
+
+
+
+4. Test out the App
+   ----------------
+   Test out the application by performing a movie search and viewing the results on your mobile
+   device.
+
+   Note: the Movie app uses a themoviedb API key specifically registered for this course.  Please
+   only use it when writing/modifying/testing code for this course.  Don't use it for personal use.
+
+   You can now make changes to App.js, movie.js, or moviecontainer.js and they will be reflected onto
+   your mobile device (please give it a few seconds before it updates the remote device).
+
+   Feel free to change or tweak things as you desire.  Sometimes changing a JS-CSS property
+   can help you see the changes to the remote device running Expo.
+
+   That's it!  Enjoy!

@@ -1,0 +1,245 @@
+Lab Exercise 6
+--------------
+
+Introduction:
+    In this exercise, you will complete a counter application that uses Redux to
+    manage the state.  This exercise will contain a counter that can be incremented
+    and decremented using a pair of buttons as well as a group of radio buttons
+    that define "by how much" the increment/decrement will be.
+
+    To complete the application, we will need to implement two action creators.
+    One action will define whether to count up or down (increment or decrement)
+    while the other action creator will be used to change the increment/decrement value as
+    set by the radio buttons.
+
+    We will also need to "connect" our CountContainer, the "Smart" component, which
+    will be responsible for implementing dispatch() actions.
+
+    The following represents a sample state of our application:
+
+    {
+        "count": 243,
+        "selectedRadio": "100"
+    }
+
+
+
+1. Create the UI within the Count Presentational Component
+   -------------------------------------------------------
+   Our Count component will not have any event handling or state logic.  It is a
+   presentational component.  We will use react-bootstrap to help lay it out
+   for us as well.  It has two parts:  1) the radio buttons, and
+   2) the increment/decrement buttons.
+
+   Open src/components/Count.jsx and within the "amount-system" div, let's add our radio buttons.  Here's how to
+   add one radio button:
+
+
+
+   <FormGroup>
+       <Radio name="amountGroup" inline
+              checked={selectedRadio === "1"} value="1"
+              onChange={onRadioChecked}>
+           1
+       </Radio>
+       {' '}
+   </FormGroup>
+
+
+   The {' '} just adds a separator between buttons.
+
+   Your task is to add 2 more radio buttons after the {' '} separator changing
+   the value and selectRadio strings to 10 and 100 respectively.
+
+
+
+   Next, we'll add the increment/decrement buttons.  Within the "count-system" div,
+   let's add our counter buttons.  Here's how to add one button:
+
+   <Button bsSize="large" block active bsStyle="primary"
+           onClick={onIncrement}>
+       Increment
+   </Button>
+
+
+
+    You should repeat this for one more button.  Change the onClick to point to
+    a function called onDecrement and put "Decrement" as the content of this button.
+
+
+    Finally, add the actual counter in between the buttons:
+
+    <span>{ count }</span>
+
+
+
+2. Create the Increment/Decrement ActionCreator
+   --------------------------------------------
+   Open src/actions/index.js.  Here we will begin defining our action creators.
+   Begin by creating a function:
+
+   Within the function, accept an argument called direction with a default value
+   of 'up'.
+
+   const createCountAction = (direction='up')=> {
+
+          let action = {
+              type: 'INCREMENT',
+          };
+
+          return action;
+      };
+
+
+   Within the function, we'll check to see if the direction is 'down'
+   before returning.  If it is, we'll change the type of the action:
+
+   if (direction === 'down'){
+       action = {
+           type: 'DECREMENT',
+       };
+   }
+
+
+
+3. Create a Single Root Reducer
+   ----------------------------
+   Next, we'll create our reducer.  We will have two reducers, but since we are
+   learning this, we'll implement it as one.  As a more advanced solution, if you
+   feel you can, implement 2 separate reducers.  However, we'll begin our main
+   (single) reducer now:
+
+   Create a function within the src/reducers/index.js file.  Being a reducer, this
+   function accepts a (previous) state object and an action as arguments and returns
+   a new state.  Begin the function with a default state as follows:
+
+const rootReducer = (state={count: 0, selectedRadio: '1'}, action) => {
+
+}
+
+
+   Now add a switch statement to detect the action type and then act accordingly:
+
+switch(action.type) {
+    case 'DECREMENT':
+        // to be filled in
+    case 'INCREMENT':
+        // to be filled in
+    default:
+        return state;
+}
+
+
+
+Each case statement branch returns the same thing:
+
+return {
+    count: state.count + parseInt(state.selectedRadio),
+    selectedRadio: state.selectedRadio
+};
+
+
+
+
+4. Create the Selected Radio Action Creator
+   ---------------------------------------
+   We are finished with the increment / decrement action creator, but now we need
+   to have an action creator for the radio buttons.  Return to src/actions/index.js
+   and write the second action creator as follows:
+
+
+const selectRadioAction = (evt) => {
+    return {
+        type: 'AMOUNT_CHANGE',
+        selectedRadio: evt.target.value
+    };
+};
+
+
+How does this action creator get invoked?  We'll see that in step 6.
+
+At this point, we are done with the two action creators.  You should export both
+of them:
+
+export { createCountAction, selectRadioAction };
+
+
+
+
+
+5. Complete the Root Reducer
+   -------------------------------
+   Returning to the root reducer, we need to add another CASE branch to our switch
+   to cover the AMOUNT_CHANGE action type.  Add the following case branch to the
+   switch control as shown:
+
+
+case 'AMOUNT_CHANGE':
+    return {
+        count: state.count,
+        selectedRadio: action.selectedRadio
+    };
+
+
+
+
+   At this point we are done with the main reducer.  Don't forget to export it
+   from your file.
+
+
+export default rootReducer;
+
+
+
+6. Create the Connected Component (CountContainer)
+   -----------------------------------------------
+   We'll create your "connected" component now.  Open src/containers/CountContainer.jsx
+   first.
+
+   Import your two actions (from src/actions/index.js).  Note: when importing a
+   file called index.js, you only have to import the name of the directory).  Also
+   import the Count class:
+
+
+import { createCountAction, selectRadioAction } from '../actions';
+import Count from '../components/Count.jsx'
+
+
+   Next we'll create a function called mapStateToProps() that will define the
+   properties within our presentational component that map to the state values
+   in our application.  This function accepts a state object as an argument:
+
+
+const mapStateToProps = (state) => {
+   return {
+       count: state.count,
+       selectedRadio: state.selectedRadio
+   };
+};
+
+
+   Let's create one last function, this time it will define how to map our event
+   handlers in the presentational component.  Remember you can do 3 interactive
+   things in the application.  You can: Click the increment button, click the decrement
+   button, and select a radio button.  So, let's map these events to event handlers
+   that then invoke dispatch calls.  The dispatch calls will accept an action
+   as an argument, but since our action creators return an action, we'll pass a
+   call to our action creators into the dispatch() calls.
+
+
+   const mapDispatchToProps = (dispatch) => {
+       return {
+           onIncrement: () => dispatch(createCountAction()),
+           onDecrement: () => dispatch(createCountAction('down')),
+           onRadioChecked: (evt) => dispatch(selectRadioAction(evt))
+       };
+   };
+
+
+   Finally, let's connect up the component...
+
+
+const CountContainer = connect(mapStateToProps, mapDispatchToProps)(Count);
+export default CountContainer;
+
+

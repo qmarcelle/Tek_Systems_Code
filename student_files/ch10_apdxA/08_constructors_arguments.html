@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Objects - Constructor Arguments</title>
+        <script type="text/javascript">
+
+            function Meeting(meetingDate, attendees){
+                this.meetingDate = meetingDate;
+                this.attendees   = attendees || ['no attendees'];
+                this.location    = 'Room 101';
+                this.getLocation = function(){ console.log(this.location); };
+            }
+
+            var m1 = new Meeting(new Date('2014-03-31'), ['Tim', 'Ester']);
+            var m2 = new Meeting(new Date('2014-04-07'));
+            m1.location = 'Room 204';
+            m1.attendees.push('Oscar');
+
+            console.log(m1.attendees); 					// ["Tim, Ester, Oscar"]
+            console.log(m2.attendees); 					// ["no attendees"]
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

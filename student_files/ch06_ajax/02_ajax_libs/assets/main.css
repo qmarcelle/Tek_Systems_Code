@@ -1,0 +1,21 @@
+html { font: 16px sans-serif; color: #4f9964; }
+ul { list-style-type: none; }
+
+.movies li {  margin-bottom: 10px; border: 1px solid blue; border-radius: 5px; width: 90%; }
+.movies li:after { display: block; clear: both; content: ''; }
+.movies img { float: right; display: block; width: 185px; margin: 5px; }
+.movies span:nth-child(2) {
+    display: block;
+    padding-left: 20px;
+    color: #bf616a;
+}
+.movies span:nth-child(3) {
+    display: block;
+    padding-left: 40px;
+    color: #0074D9;
+}
+.movies span:nth-child(4) {
+    display: block;
+    padding-left: 40px;
+    color: #544ed9;
+}

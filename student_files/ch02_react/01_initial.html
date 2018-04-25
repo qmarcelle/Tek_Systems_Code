@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>React Initial Example 1</title>
+        <style>
+            html { font-size: 20px; }
+            h3, h4 { margin: 0; }
+            ul { padding: 0; list-style-type: none; }
+            #root div { width: 40%; background-image: linear-gradient(to top, #CAFFB8, #6dc582) }
+            #root li { display: flex; font-size: 0.75rem; }
+            #root h2 { font-size: 1.25rem; color: #0b3e6f; }
+            #root li h3 { width: 40%; }
+            #root li h4 { width: 60%; }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="libs/react.js"></script>
+        <script src="libs/react-dom.js"></script>
+        <script>
+
+            var rootEl =
+                React.createElement('div', null,
+                    React.createElement('h2', null, 'Contacts'),
+                    React.createElement('ul', null,
+                        React.createElement('li', null,
+                            React.createElement('h3', null, 'Red Victors'),
+                            React.createElement('h4', null, '4517 Elm St. Riverside NJ 08075')
+                        ),
+                        React.createElement('li', null,
+                            React.createElement('h3', null, 'Bob Green'),
+                            React.createElement('h4', null, '2101 Eucalyptus Ave. Philadelphia PA 09119')
+                        )
+                    )
+                );
+
+            ReactDOM.render(rootEl, document.getElementById('root'));
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "name": "es2015_examples",
+  "version": "1.0.0",
+  "description": "ES2015 examples",
+  "private": true,
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "start": "webpack-dev-server --hot",
+    "create-bundle": "webpack"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "webpack": "^2.7.0",
+    "webpack-dev-server": "^2.9.7",
+    "lodash": "^4.17.4",
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+  }
+}

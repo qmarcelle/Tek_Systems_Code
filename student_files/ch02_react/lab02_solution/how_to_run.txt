@@ -1,0 +1,63 @@
+1. Install Global Packages
+   -----------------------
+   You must first install global packages...
+
+   npm install -g babel-cli
+   npm install -g webpack
+   npm install -g webpack-dev-server
+
+
+2. Install Local (Project) Packages
+   --------------------------------
+   Next, install local packages by running:     npm install
+   (from the directory of the project folder).
+
+   You can also run items individually (though this is long) using:
+        npm install react react-dom babel-core babel-loader babel-preset-env
+                    babel-preset-react webpack webpack-dev-server
+                    babel-plugin-transform-es2015-destructuring
+                    babel-plugin-transform-object-rest-spread --save
+
+   Note: From within WebStorm, you may right-click on package.json and choose:
+
+            Show npm scripts
+
+   then right-click again and choose:   npm install
+
+
+3. Running via bundle.js: Webpack Build and (Babel) Transpile
+   ----------------------------------------------------------
+   This approach creates bundle.js.  In turn, bundle.js and related resources can be
+   placed on an HTTP server and served up as desired (not this is not a production build).
+
+   From a command-line within the project directory, issue the command:
+
+                webpack
+
+
+   This should cause webpack to read the webpack.config.js file
+   and then invoke Babel to compile the ES2015 resources/modules into a file called bundle.js.
+
+   Note: From within WebStorm, you can run:  create-bundle
+   by double-clicking it in the npm view.
+
+
+4. Run on Server: Using the Webpack Dev Server
+   -------------------------------------------
+   This approach is preferred for development within the course.  It will launch a
+   webpack server on port 8006.
+
+   To run your solution:
+
+   From a command-line in the project directory, type:
+
+                webpack-dev-server --hot
+
+   then browse to localhost:8006/index.html once again.
+
+   Within Webstorm: double-click the 'start' item in the npm view.
+   The server should launch on port 8006.
+
+
+
+5. Any changes to a .js need to be re-transpiled by running the webpack command (step 3 again).

@@ -1,0 +1,211 @@
+Lab Exercise 6
+--------------
+
+Introduction:
+    In this exercise, you will incorporate Ajax, the pub-sub mechanism, and react-bootstrap discussed in
+    the chapter.  You will create a mini-application that searches for movies and displays the results on
+    the page.
+
+    Files that need to be edited (in this order):
+    App.jsx
+    SearchForm.jsx
+    SearchFormContainer.jsx
+    Movie.jsx
+    MovieListContainer.jsx
+
+
+
+1. Preparation
+   -----------
+   As preparation, you will need to run npm install to load the necessary
+   modules.  Do this either from a terminal window in the directory of the lab06_starter
+   folder or from within WebStorm, right-click the package.json file and choose
+   Run npm install.
+
+
+2. Complete App.jsx
+   ----------------
+   In your IDE (such as WebStorm), expand the src/components directory.  Browse
+   the files in the movie and search directories.  We'll begin by modifying App.jsx.
+
+   Open App.jsx, complete the render function.  Beneath the <AlertContainer> component
+   (which is merely the popup notification component (toast)), but within the <div>, add
+   the SearchFormContainer and MovieListContainer components.
+
+            <AlertContainer ref={ac => this.toaster = ac }  />
+            <SearchFormContainer />
+            <MovieListContainer />
+
+   Add a "show" prop to the SearchFormContainer that points to the showAlert()
+   function.  This will be used to display any Ajax errors.
+
+            show={this.showAlert}
+
+3. Add an import at the top to import react-bootstrap.  You will need the
+   Grid, Row, and Col components.
+
+            import {Grid, Row, Col} from 'react-bootstrap';
+
+4. Add the newly imported components into the <div> to create two columns
+   such that the search form is on the left column and the movie list will
+   render into the right column.  Your values for column widths may vary.
+
+            <div>
+               <AlertContainer ref={ac => this.toaster = ac }  />
+               <Grid>
+                   <Row>
+                       <Col lg={5} md={4} sm={12} xs={12}>
+                           <SearchFormContainer show={this.showAlert} />
+                       </Col>
+                       <Col  lg={7} md={8} sm={12} xs={12}>
+                           <MovieListContainer />
+                       </Col>
+                   </Row>
+               </Grid>
+           </div>
+
+   App.jsx should be complete!
+
+------------------------------------------------------------------------------
+
+5. Create the SearchForm Component (on your own)
+   -------------------------------
+   Open search/SearchForm next.  In the space provided, create the form using
+   react-bootstrap components.  The import is already provided for you.  Render
+   results into 2 columns.
+
+   Use the form shown in the student manual as a guide for creating your form.
+   Your form will look nearly the same.  Here are some items to include:
+
+   - On the Form component add: onSubmit={this.props.onSubmit}
+   - On the FormControl: value={this.props.searchTerm} and onChange={this.props.onChange}
+
+    That should complete SearchForm.jsx!
+
+----------------------------------------------------------------------------
+
+6. Add Event Handling to SearchFormContainer
+   -----------------------------------------
+   Let's get the onChange functionality working in the SearchFormContainer.
+   In the constructor, initialize the state object:
+
+        this.state = { searchTerm: '' };
+
+   Next, add a handleInputChange() function to the class.  Within it, set the new
+   state value:
+
+       handleInputChange(evt) {
+           this.setState({ searchTerm: evt.target.value });
+       }
+
+   On the <SearchForm /> component in the render() function, add the following:
+
+        onChange={this.handleInputChange}
+
+
+   For time purposes, the onSubmit() functionality is already provided.
+
+
+
+----------------------------------------------------------------------------
+7. Complete Movie.jsx   (Can you do this on your own?)
+   ------------------
+   Like SearchForm, Movie is a presentational component.  There isn't any major
+   logic in this component.  We will complete this component much like we did
+   the SearchForm.  You have some flexibility to add your own layout values, but
+   perhaps to begin with, you should follow the recommended approach first!
+
+   Within Movie.jsx, add the layout for a movie within the provided <li>
+   element.  It should contain a <Grid>, <Row>, and <Col> for each movie
+   rendered.  It should contain two columns.  In the first column, we'll
+   add title, release_date, and overview movie props.  In the second column, we'll
+   add a Poster.
+
+   Add the <Grid>, <Row>, and <Col> attributes around the two columns.  The
+   two columns are shown below.  Use the following values for the Col components:
+
+   <Col lg={8} md={8} sm={12} xs={12}>       <-- for column 1
+   <Col lg={4} md={4} sm={12} xs={12}>       <-- for column 2
+
+   Column 1:
+            <h2>{this.props.title}</h2>
+            <span>Release Date:</span><time>{this.props.release_date}</time>
+            <p>{this.props.overview}</p>
+
+   Column 2:
+            <Poster path={ this.props.poster_path } />
+
+
+    Refer to the back of the student manual to verify your form against the suggested
+    one.
+
+
+   That's it for Movie.jsx.  Our only remaining tasks are to perform the Ajax
+   requests and set up the pub-sub calls.
+
+
+   ---------------------------------------------------------------------
+
+   8. Make an Ajax Request
+      --------------------
+      You may choose any of the previously discussed Ajax implementations.
+      Axios will be used for the solution.  For Axios, SuperAgent, or jQuery,
+      add the appropriate import to SearchFormContainer.jsx (refer to the
+      student manual).
+
+      In the then() part of your Ajax call, you supply a function (an arrow function will be okay).
+
+      Within the handleSubmit() function of SearchFormContainer.jsx,
+      add an Ajax call to the end of it.
+
+      For now, leave the body of the callback function in your then() blank.
+
+      In the catch(), add a function that will invoke the popup notification
+      and display the Ajax error.  You can do this by calling this.props.show(errMsg),
+      where errMsg is YOUR own error message to display
+
+      Below is a sample of what your Ajax request might look like, (yours can vary):
+
+            axios.get(url)
+                .then(results => {
+                    if(results.data.results) {
+                        // to be completed in the next step
+                    }
+                    else throw 'No results returned.';
+                })
+                .catch(errors => this.props.show('Error detected: ' + errors));
+
+
+
+   9. Complete the Pub-Sub Calls
+      --------------------------
+      There are two parts to the pub-sub mechanism.  SearchFormContainer.jsx will "publish"
+      to a topic.  Then, MovieListContainer will subscribe and receive items.  Both files
+      already have PubSub imported.
+
+      Within your previous step's Ajax call, add a statement to publish the Ajax data to
+      the topic.  In Axios, response data is found in the results.data property.  The
+      data returned from the server is an array found in the results property within data:
+
+
+            PubSub.publish('MOVIE_DATA', results.data.results);
+
+
+
+      Next, in the MovieListContainer, we'll set up the component to receive published data.
+
+      In the componentWillMount() method, add a statement to subscribe to our topic:
+
+            PubSub.subscribe('MOVIE_DATA', this.getResults);
+
+
+      The getResults() function will be used to update the state object.  Create a getResults
+      method and update the state with the received movie data:
+
+            getResults(channel, movies) {
+                this.setState({ movies });
+            }
+
+
+      Don't forget to add a proper bind() statement for getResults() in the constructor.
+      Do this on your own--and don't forget it!

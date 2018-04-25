@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>JS Objects</title>
+    <script type="text/javascript">
+
+        function Meeting(meetingDate, attendees, location){
+            this.meetingDate = meetingDate;
+            this.attendees   = attendees || ['no attendees'];
+            this.location    = location  || 'no location';
+        }
+
+        Meeting.prototype.getLocation = function(){ console.log(this.location); };
+
+        var m1 = new Meeting(new Date('2014-03-31'), ['Tim', 'Ester'], 'Room 115');
+        var m2 = new Meeting(new Date('2014-04-07'));
+
+        m1.getLocation();
+        m2.getLocation();
+
+    </script>
+</head>
+<body>
+</body>
+</html>

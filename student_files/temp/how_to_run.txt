@@ -1,0 +1,32 @@
+1. Ensure you have installed global packages (as discussed in previous examples):
+
+   npm install -g babel-cli
+   npm install -g webpack
+   npm install -g webpack-dev-server
+
+
+2. Install Local Packages:
+
+   npm install
+
+   Note: From within WebStorm, you may right-click on package.json and choose:
+
+            Show npm scripts
+
+   then right-click again and choose:   npm install
+
+
+3. Run the ExpressJS Server:
+
+   From a command-line within the project directory, issue the command:
+
+                node server.js
+
+   This should cause server.js to start which launches an ExpressJS server (on port 8006).
+   Internally, this will also cause the webpack command to run which then
+   examines the webpack.config.js file and compiles it.  It invokes Babel to compile the
+   ES2015 resources/modules into a file called bundle.js.  bundle.js is created in memory.
+
+   Note: From within WebStorm, you can simply double-click the server entry in the npm
+   scripts view.  This will automatically run the server and compile bundle.js.
+

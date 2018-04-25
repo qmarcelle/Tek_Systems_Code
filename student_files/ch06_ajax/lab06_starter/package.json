@@ -1,0 +1,39 @@
+{
+  "name": "Lab_6_Starter",
+  "version": "1.0.0",
+  "description": "Lab 6 Starter",
+  "main": "src/index.js",
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "webpack": "^2.7.0",
+    "webpack-dev-server": "^2.9.7",
+    "webpack-hot-middleware": "^2.21.0",
+    "lodash": "^4.17.4",
+    "express": "^4.16.2",
+    "axios": "^0.17.1",
+    "jquery": "^3.2.1",
+    "superagent": "^3.8.2",
+    "styled-components": "^2.3.0",
+    "react-alert": "^2.4.0",
+    "pubsub-js": "^1.5.8",
+    "react-bootstrap": "^0.31.5"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-styled-components": "^1.3.0"
+  },
+  "scripts": {
+    "server": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

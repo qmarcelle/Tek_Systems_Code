@@ -1,0 +1,14 @@
+Running this React Native app can be done two ways:
+
+1. Run the package.json with an npm install command which will rebuild the
+   node_modules folder (note: it is fairly large--around 250Mb).  Then proceed
+   with the npm start or yarn start commands from the project directory.  Expo
+   will need to be running on your mobile device and it can connect to your
+   server through your network.
+
+2. Run the create-react-native-app tool that you install using npm or yarn.
+   It will create a new project.  Then replace the App.js that is created
+   in it with either App1.js or App2.js (you will need to overwrite the
+   existing App.js).  If you try to run App2 (which is the Movie example),
+   you will also need to copy the movie directory into the root of the new
+   project.

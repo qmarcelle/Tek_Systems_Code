@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8" />
+	    <title>Exceptions</title>
+
+	</head>
+	<body>
+	    <div id="myDiv"></div>
+	    
+	    <script type="text/javascript">
+
+			function checkDiv(id){
+				var myDiv = document.getElementById('myDiv');
+                if(!myDiv)
+                    throw new Error('No div with that ID!');
+
+                myDiv.foo();			// Generates a TypeError
+
+                throw 'Anything';		// err in the catch will be 'Anything'
+			}
+
+			try {
+                checkDiv('myDiv');
+            }
+            catch(err) {
+                console.log(err);
+                console.log(err.name);
+                console.log(err.message);
+            }
+			
+		</script>
+	</body>
+</html>

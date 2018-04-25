@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Prototypes</title>
+        <script type="text/javascript">
+
+            function Meeting(){}
+
+            Meeting.prototype.meetingDate = new Date('2014-03-03');
+            Meeting.prototype.attendees   = ['Chuck', 'Sally', 'Barb'];
+            Meeting.prototype.location    = 'Room 101';
+            Meeting.prototype.getLocation = function(){ console.log(this.location); };
+
+            var m1 = new Meeting();
+            console.log(m1.attendees);                  // ["Chuck", "Sally", "Barb"]
+            m1.getLocation(); 							// 'Room 101'
+            m1.attendees.push('Eddie');
+
+            var m2 = new Meeting();
+			m2.location = 'Room 210';
+            console.log(m2.attendees); 					// ["Chuck", "Sally", "Barb", "Eddie"]
+
+            console.log(m1.location);                   // ???
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

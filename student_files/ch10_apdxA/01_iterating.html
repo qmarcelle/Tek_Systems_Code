@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8" />
+	    <title>Iterating in JavaScript</title>
+
+	</head>
+	<body>
+	    <div id="mtgList"></div>
+	    
+	    <script type="text/javascript">
+	    
+			// use this simple template for any purpose
+			(function(){
+				var i, prop, mtg,
+					mNode    = document.getElementById('mtgList'),
+					meetings = [{location: 'Room 101', date: '2015-06-07'},
+								{location: 'Room 110', date: '2015-06-11'},
+								{location: 'Room 120', date: '2015-05-28'}];
+
+				for (i = 0; i < meetings.length; i++) {
+					mtg = meetings[i];
+					for (prop in mtg) {
+						console.log(mtg[prop]);
+					}
+					mNode.appendChild(document.createTextNode(mtg.location));
+					mNode.appendChild(document.createElement('br'));
+				}
+
+				meetings.forEach(function(mtg, idx){ console.log(idx + ' ' + mtg.location); });
+			})();
+		</script>
+	</body>
+</html>

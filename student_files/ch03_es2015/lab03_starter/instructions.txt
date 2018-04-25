@@ -1,0 +1,53 @@
+Lab Exercise 3
+--------------
+
+Introduction:
+    In this exercise, you will use ES2015 features while revisiting the previous
+    exercise.  You will also create a new class called ContactSearch.
+    Shortly, ContactSearch will allow a user to look up a contact by their contactid.
+
+
+1. Begin by opening the src/components/contact.jsx file.  Modify the Contact class such
+   that the this.props.contacts.map() call uses an arrow function instead of the existing
+   standard-style function.
+
+   Test the change by running:
+        npm install (from the lab03_starter folder)
+        npm run create-bundle
+        npm start
+
+        (or run any of these from within WebStorm as previously discussed)
+
+
+2. Create a new file within the components directory called contactsearch.jsx.
+   Create a new class in this file called ContactSearch.  This class will
+   encapsulate a form.  Create the class to have a constructor.  Allow it to accept
+   one argument called: props.
+
+   Within the constructor (since you are providing it), you should call the base class
+   constructor (pass props into it).  Also, within the constructor (after the super() call),
+   set a variable called state on the this object as follows:
+
+   this.state = { searchVal: '500' };
+
+
+3. The render function of ContactSearch should render a form.  It should have the
+   following structure:
+
+   <form className="search-form">
+       <span>Enter Contact ID: </span>
+       <input type="text" placeholder="500"
+              value={this.state.searchVal} />
+       <input type="submit" value="Find Contact" />
+   </form>
+
+
+4. Make ContactSearch the default export from this module.
+
+5. Edit app.jsx to no longer import the ContactList, but rather, to import the
+   ContactSearch form.
+   Note: if you wish to comment out the ContactList component, but not delete it,
+   the syntax for commenting something out in JSX is:
+
+   {/* <ContactList contacts={this.props.contacts}/> */}
+

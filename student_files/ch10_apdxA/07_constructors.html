@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Objects</title>
+        <script type="text/javascript">
+            		
+            function Meeting(){
+            	this.meetingDate = new Date('2014-03-03');
+                this.attendees   = ['Chuck', 'Sally', 'Barb'];
+                this.location    = 'Room 101';
+                this.getLocation = function(){ console.log(this.location); };
+            }
+            
+			var m1 = new Meeting();
+            var m2 = new Meeting();
+            m1.location = 'Room 204';
+            m1.attendees.push('Oscar');
+            m1.getLocation(); 							// 'Room 204'
+            m2.getLocation(); 							// 'Room 101'
+            
+			console.log(m1.attendees); 					// ["Chuck, Sally, Barb, Oscar"]
+            console.log(m2.attendees); 					// ["Chuck, Sally, Barb"]
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

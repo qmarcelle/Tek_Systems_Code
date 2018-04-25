@@ -1,0 +1,16 @@
+{
+  "name": "05_es2015_modules",
+  "version": "1.0.0",
+  "description": "ES2015 modules example",
+  "private": true,
+  "scripts": {
+    "create-bundle": "webpack"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^6.2.10",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^1.15.0"
+  }
+}

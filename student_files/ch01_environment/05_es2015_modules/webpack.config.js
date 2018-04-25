@@ -1,0 +1,16 @@
+let config = {
+    entry: './module3.js',
+
+    output: {
+        filename: 'bundle.js',
+    },
+
+    module: {
+        loaders: [
+            { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+            { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
+        ]
+    },
+};
+
+module.exports = config;

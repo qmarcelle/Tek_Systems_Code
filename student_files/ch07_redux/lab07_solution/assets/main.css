@@ -1,0 +1,22 @@
+html { font: 16px sans-serif; color: #4f9964; }
+ul { list-style-type: none; }
+
+.amount-system .form-group{
+    margin: 20px auto;
+    width: 50%;
+    text-align: center;
+    font-size: 2.5rem;
+}
+.amount-system .form-group label { margin: 5px 5%; }
+.amount-system .form-group input {
+    margin-top: 22px;
+    transform: scale(2.5);
+}
+
+.count-system { width: 50%; margin: 40px auto; }
+.count-system span {
+    display: block;
+    margin: 50px 0;
+    font-size: 3rem;
+    text-align: center;
+}

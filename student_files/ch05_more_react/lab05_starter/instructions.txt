@@ -1,0 +1,41 @@
+Lab Exercise 5
+--------------
+
+Introduction:
+    In this exercise, you will refactor the previous exercise to convert it to use
+    Containers and Presentational Components.  This will involve converting the
+    ContactList and Contact to become ContactListContainer (where the event handling
+    and state will reside).  ContactList and Contact will become "dumb" components
+    only containing props to render.
+
+    Also, we will rename files (capitalize filenames) and move components into their
+    own files.  Also, we will organize components by feature, not by type.
+
+    This exercise is meant to be a loosely guided one.  You should refactor items
+    on your own as you see fit.  A suggested directory structure was presented to you to
+    work from on the exercise slide.  However, you may change this structure if you
+    desire.
+
+
+
+1. Rename and Refactor files
+   -------------------------
+    Rename files according to the diagram shown on the slide.  Move classes into their
+    on files (e.g., ContactList should go into ContactList.jsx)
+
+    Components whose names match the directory name can go into a file called index.js.
+    (e.g., MainHeader when placed into a directory called MainHeader can actually just
+    be placed in a file called index.js.  This will then be imported automatically.
+
+
+
+2. Create a ContactListContainer Class
+   ------------------------------------
+   This will be a "smart" or container component.
+   ContactListContainer will hold the state management, event handling logic.  ContactList
+   and Contact classes should no longer provide any event handling.
+
+
+
+   Based on just these two steps, can you refactor you solution to make the above
+   mentioned changes and still get this to run?
